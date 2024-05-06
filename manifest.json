@@ -1,0 +1,56 @@
+{
+    "manifest_version": 1,
+    "type": "WebApp",
+    "meta": {
+        "name": "TreasuryFrame",
+        "author": "dePasta @ Github",
+        "version": "0.0.1.001",
+        "minimum-overwolf-version": "128.0.0.1",
+        "minimum-gep-version": "128.0.0.1",
+        "description": "A utility app for warframe to handle relics",
+        "dock_button_title": "TreasuryFrame",
+        "icon": "assets/iconMouseOver.png",
+        "icon_gray": "assets/iconMouseNormal.png",
+        "launcher_icon": "assets/desktop-icon.ico",
+        "splash_image": "assets/iconMouseNormal.png",
+        "window_icon": "assets/iconMouseNormal.png"
+    },
+    "permissions": ["GameInfo","Clipboard"],
+    "max_rotation_log_files": 20,
+    "data": {
+        "game_targeting": {"type": "dedicated","game_ids": [8954]},
+        "start_window": "background",
+        "enable_top_isolation": true,
+        "windows": {
+            "background": {
+                "file": "main.html",
+                "show_in_taskbar": true,
+                "transparent": true,
+                "override_on_update": true,
+                "resizable": false,
+                "show_minimize": true,
+                "is_background_page": true
+            },
+            "in_game": {
+                "file": "app.html",
+                "show_in_taskbar": false,
+                "transparent": true,
+                "override_on_update": true,
+                "resizable": false,
+                "show_minimize": true,
+                "is_background_page": false
+            }
+        },
+        "process_name": "TreasuryFrame",
+        "url_protocol": {"scheme": "testscheme"},
+        "developer": {
+            "enable_auto_refresh": true,
+            "reload_delay": 1000,
+            "filter": "*.json;*.html"
+        },
+        "uninstall_window": {
+            "file": "uninstall.html",
+            "required_runtime": 1000
+        }
+    }
+}
