@@ -1,0 +1,22 @@
+            "inGameWindow": {
+                "file": "src/windows/ingame.html",
+                "in_game_only": true,
+                "focus_game_takeover": "ReleaseOnHidden",
+                "focus_game_takeover_release_hotkey": "sample_app_showhide",
+                "resizable": false,
+                "transparent": true,
+                "override_on_update": true,
+                "size": {
+                  "width": 1212,
+                  "height": 699
+                },
+                "min_size": {
+                  "width": 1212,
+                  "height": 699
+                }
+            },
+            "background": {
+                "file": "src/windows/background.html",
+                "background_optimization": true,
+                "is_background_page": true
+            }

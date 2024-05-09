@@ -5,8 +5,7 @@
         "name": "TreasuryFrame",
         "author": "dePasta @ Github",
         "version": "0.0.1.001",
-        "minimum-overwolf-version": "128.0.0.1",
-        "minimum-gep-version": "128.0.0.1",
+        "minimum-overwolf-version": "0.92.300.0",
         "description": "A utility app for warframe to handle relics",
         "dock_button_title": "TreasuryFrame",
         "icon": "assets/iconMouseOver.png",
@@ -15,42 +14,41 @@
         "splash_image": "assets/iconMouseNormal.png",
         "window_icon": "assets/iconMouseNormal.png"
     },
-    "permissions": ["GameInfo","Clipboard"],
-    "max_rotation_log_files": 20,
     "data": {
-        "game_targeting": {"type": "dedicated","game_ids": [8954]},
-        "start_window": "background",
+        "game_targeting": { "type": "dedicated", "game_ids": [8954] },
+        "start_window": "mainWindow",
         "enable_top_isolation": true,
         "windows": {
-            "background": {
-                "file": "main.html",
+            "mainWindow": {
+                "file": "src/windows/main.html",
+                "transparent": true,
+                "clickthrough": true,
+                "resizable": false,
                 "show_in_taskbar": true,
-                "transparent": true,
-                "override_on_update": true,
-                "resizable": false,
-                "show_minimize": true,
-                "is_background_page": true
-            },
-            "in_game": {
-                "file": "app.html",
-                "show_in_taskbar": false,
-                "transparent": true,
-                "override_on_update": true,
-                "resizable": false,
-                "show_minimize": true,
-                "is_background_page": false
+                "size": {
+                    "width": 1212,
+                    "height": 699
+                },
+                "start_position": {
+                    "Top": 10,
+                    "Left": 10
+                }
             }
         },
-        "process_name": "TreasuryFrame",
-        "url_protocol": {"scheme": "testscheme"},
+        "game_events": [8954],
         "developer": {
             "enable_auto_refresh": true,
             "reload_delay": 1000,
             "filter": "*.json;*.html"
         },
-        "uninstall_window": {
-            "file": "uninstall.html",
-            "required_runtime": 1000
-        }
+        "launch_events": [
+            {
+                "event": "GameLaunch",
+                "event_data": {
+                    "game_ids": [8954]
+                },
+                "start_minimized": false
+            }
+        ]
     }
 }
