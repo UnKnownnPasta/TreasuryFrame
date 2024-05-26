@@ -1,0 +1,98 @@
+* {
+    margin: 0px;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+
+    .topbar {
+        display: flex;
+        background-color: #2f2d34;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 5rem;
+
+        .logo {
+            width: max-content;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .text {
+            padding: 10px;
+            color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            span {
+                font-size: 40px;
+            }
+        }
+
+        .helper {
+            display: flex;
+            justify-content: space-between;
+            margin-left: auto;
+            padding: 30px;
+            gap: 20px;
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .main-content {
+        display: flex;
+        flex: 1;
+        width: 100%;
+
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            background-color: #2f2d34;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .item {
+                padding: 20px;
+                justify-content: center;
+
+                span {
+                    font-weight: 500;
+                    font-size: 30px;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .content {
+            height: 100%;
+            flex: 1;
+            background-color: black;
+        }
+    }
+}
