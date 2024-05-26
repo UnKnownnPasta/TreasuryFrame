@@ -1,0 +1,282 @@
+* {
+    margin: 0px;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.dot-pattern {
+    --dot-bg: #151c1c;
+    --dot-color: white;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: visible;
+
+    .topbar {
+        display: flex;
+        background-color: #2f2d34;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 3rem;
+
+        .logo {
+            width: max-content;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            padding-left: 7px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                /* border-radius: 50%; */
+                object-fit: cover;
+                cursor: pointer;
+            }
+        }
+
+        .text {
+            padding: 2px;
+            color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            
+            span {
+                font-size: 20px;
+                opacity: 1;
+                transition: opacity 0.2s ease;
+
+                &.collapsed {
+                    opacity: 0;
+                }
+            }
+        }
+
+        .userinfo {
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            align-items: center;
+            display: flex;
+            gap: 10px;
+
+            img {
+                width: 25px;
+                height: 25px;
+                object-fit: contain;
+            }
+
+            span {
+                color: white;
+                font-weight: 10;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+        }
+
+        .helper {
+            display: flex;
+            justify-content: space-between;
+            margin-left: auto;
+            padding: 30px;
+            gap: 20px;
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .main-content {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        position: relative;
+        height: calc(100vh - 5rem);
+
+        .sidebar {
+            height: 100%;
+            width: 170px;
+            background-color: #2f2d34;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.2s ease;
+            z-index: 20;
+
+            &.collapsed {
+                width: 70px;
+            }
+
+            .item {
+                padding: 20px;
+                padding-left: 15px;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                white-space: nowrap;
+                align-self: flex-start;
+
+                img {
+                    width: 35px;
+                    height: 35px;
+                    object-fit: contain;
+                    cursor: pointer;
+                }
+
+                span {
+                    font-weight: 500;
+                    font-size: 17px;
+                    color: white;
+                    cursor: pointer;
+                    display: contents;
+                    transition: display 0.4s ease;
+                    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+                    &.collapsed {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .content {
+            position: relative;
+            flex: 1;
+            width: auto;
+            background-color: black;
+            flex-direction: column;
+            height: 100%;
+            display: flex;
+
+            .topdata {
+                padding: 10px;
+                width: auto;
+                height: 4%;
+                align-items: center;
+                display: flex;
+                flex: 1;
+
+                span {
+                    color: white;
+                    padding: 10px;
+                    font-size: 20px;
+                    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+
+                .filters {
+                    width: 270px;
+                    margin-left: auto;
+                    padding: 5px;
+                    padding-right: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    gap: 15px;
+
+                    .rarity {
+                        cursor: pointer;
+                        width: 15px;
+                        height: 15px;
+                        margin-right: 7px;
+                        color: white;
+                        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+                        &.square {
+                            width: 10px;
+                            height: 10px;
+                            margin-right: inherit;
+                            background-color: #ccc;
+                            border: 2px solid transparent;
+                            transition: background-color 0.3s ease, border-color 0.3s ease;
+                        }
+
+                        &.ed { background-color: purple; }
+                        &.red { background-color: red; }
+                        &.orange { background-color: orange; }
+                        &.yellow { background-color: yellow; }
+                        &.green { background-color: green; }
+                    }
+                }
+            }
+
+            .parts {
+                display: grid;
+                /* overflow-y: scroll; */
+                width: auto;
+                height: 100%;
+                background-color: rgb(61, 61, 61);
+                padding: 15px;
+                gap: 10px;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+                .part-item {
+                    width: 170px;
+                    height: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 0;
+                    border-width: 1px;
+                    border-color: #bbbdb9;
+                    border-style: solid;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                        width: 90px;
+                        height: 90px;
+                        padding: 10px;
+                        padding-top: 0;
+                        object-fit: contain;
+                    }
+
+                    .about {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+
+                        .status-color {
+                            width: 20px;
+                            height: 20px;
+
+                            &.ed { background-color: purple; }
+                            &.red { background-color: red; }
+                            &.orange { background-color: orange; }
+                            &.yellow { background-color: yellow; }
+                            &.green { background-color: green; }
+                        }
+
+                        span {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
