@@ -24,3 +24,17 @@ logoBtn.addEventListener('click', () => {
             break;
     }
 })
+
+const currentView = 'icon'
+const iconview = document.getElementById('iconview')
+const eraview = document.getElementById('eraview')
+
+document.getElementById('relic-iconview').addEventListener('click', () => {
+    iconview.style.display = 'grid'
+    eraview.style.display = 'none'
+})
+
+document.getElementById('relic-eraview').addEventListener('click', () => {
+    iconview.style.display = 'none'
+    eraview.style.display = 'flex'
+})

@@ -189,12 +189,21 @@ body, html {
                 .filters {
                     width: 270px;
                     margin-left: auto;
-                    padding: 5px;
                     padding-right: 10px;
+                    display: flex;
                     align-items: center;
                     justify-content: center;
-                    display: flex;
                     gap: 15px;
+
+                    .explain {
+                        color: white;
+                        padding-left: 6px;
+                        padding-right: 6px;
+                        margin-top: 2px;
+                        border: 1px solid #7393B3;
+                        border-radius: 7px;
+                        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                    }
 
                     .rarity {
                         cursor: pointer;
@@ -246,15 +255,15 @@ body, html {
                     justify-content: center;
 
                     &.marked {
-                        border-color: rgb(58, 181, 58);
+                        border-color: rgb(58, 158, 181);
                     }
 
                     .topinfo {
                         display: flex;
                         flex-direction: row;
-                        justify-items: center;
+                        justify-content: space-between;
                         align-items: center;
-                        gap: 80px;
+                        width: 85%;
 
                         .owned {
                             color: white;
@@ -294,9 +303,9 @@ body, html {
                             flex-direction: row;
                             width: 90%;
                             gap: 10px;
-    
+
                             .status-color {
-                                width: 20px;
+                                width: 14%;
                                 height: 20px;
     
                                 &.ed { background-color: purple; }
