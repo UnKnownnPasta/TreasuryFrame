@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreasuryFrame Mock</title>
+    <link rel="shortcut icon" href="./assets/TreasuryFrame-300.png">
+    <link rel="stylesheet" href="./relics.css">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo" id="tflogo">
+                <img src="./assets/TreasuryFrame.png" alt="">
+            </div>
+            <div class="text">
+                <span id="tfname">TreasuryFrame</span>
+            </div>
+            <div class="userinfo">
+                <img src="./assets/avatar.png" alt="">
+                <span>Username</span>
+            </div>
+            <div class="helper">
+                <img src="./assets/info.png" alt="">
+                <img src="./assets/discord.webp" alt="">
+                <img src="./assets/settings.png" alt="">
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="sidebar" id="main-sidebar">
+                <div class="item"><img src="./assets/weapon.png" alt=""><span class="sidebar-item">Parts</span></div>
+                <div class="item"><img src="./assets/relic.webp" alt=""><span class="sidebar-item">Relics</span></div>
+                <div class="item"><img src="./assets/resource.webp" alt=""><span class="sidebar-item">Resources</span></div>
+                <div class="item"><img src="./assets/fissures.webp" alt=""><span class="sidebar-item">Fissures</span></div>
+            </div>
+            <div class="content">
+                <div class="topdata">
+                    <span>Inventory / Relics</span>
+                    <div class="viewtype">
+                        <div class="explain">View:</div>
+                        <div class="allview" id="relic-iconview"><img src="./assets/squareicons.png"></div>
+                        <div class="eraview" id="relic-eraview"><img src="./assets/stackedicons.png"></div>
+                    </div>
+                    <div class="erafilter">
+                        <div class="explain">Era:</div>
+                        <span>All</span>
+                        <img src="./assets/LithRelicIntact.webp">
+                        <img src="./assets/MesoRelicIntact.webp">
+                        <img src="./assets/NeoRelicIntact.webp">
+                        <img src="./assets/AxiRelicIntact.webp">
+                    </div>
+                    <div class="filters">
+                        <div class="explain">Filters:</div>
+                        <div class="rarity" title="Show All Relics">All</div>
+                        <div class="rarity square ed" title="Show ED Stock Relics"></div>
+                        <div class="rarity square red" title="Show RED Stock Relics"></div>
+                        <div class="rarity square orange" title="Show ORANGE Stock Relics"></div>
+                        <div class="rarity square yellow" title="Show YELLOW Stock Relics"></div>
+                        <div class="rarity square green" title="Show GREEN Stock Relics"></div>
+                    </div>
+                </div>
+                <div class="relics-icons" id="iconview">
+                    <div class="relic-item dot-pattern">
+                        <div class="topinfo">
+                            <div class="owned">117x</div>
+                            <img src="./assets/addicon.png" alt="">
+                        </div>
+                        <div class="bottominfo">
+                            <img src="./assets/relic.webp" alt="">
+                            <div class="about">
+                                <div class="status-color orange"></div>
+                                <span>Lith G11</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relic-item dot-pattern">
+                        <div class="topinfo">
+                            <div class="owned">4x</div>
+                            <img src="./assets/addicon.png" alt="">
+                        </div>
+                        <div class="bottominfo">
+                            <img src="./assets/MesoRelicIntact.webp" alt="">
+                            <div class="about">
+                                <div class="status-color red"></div>
+                                <span>Meso V8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relic-item dot-pattern">
+                        <div class="topinfo">
+                            <div class="owned">17x</div>
+                            <img src="./assets/addicon.png" alt="">
+                        </div>
+                        <div class="bottominfo">
+                            <img src="./assets/NeoRelicIntact.webp" alt="">
+                            <div class="about">
+                                <div class="status-color ed"></div>
+                                <span>Neo N9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relic-item dot-pattern">
+                        <div class="topinfo">
+                            <div class="owned">36x</div>
+                            <img src="./assets/addicon.png" alt="">
+                        </div>
+                        <div class="bottominfo">
+                            <img src="./assets/AxiRelicIntact.webp" alt="">
+                            <div class="about">
+                                <div class="status-color red"></div>
+                                <span>Axi F2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relic-eras" id="eraview">
+                    <div class="era">
+                        <span>Lith</span>
+                        <div class="relics">
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                                                        <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="era">
+                        <span>Meso</span>
+                        <div class="relics">
+
+                        </div>
+                    </div>
+                    <div class="era">
+                        <span>Neo</span>
+                        <div class="relics">
+
+                        </div>
+                    </div>
+                    <div class="era">
+                        <span>Axi</span>
+                        <div class="relics">
+                            <div class="relic-item dot-pattern">
+                                <div class="topinfo">
+                                    <div class="owned">117x</div>
+                                    <img src="./assets/addicon.png" alt="">
+                                </div>
+                                <div class="bottominfo">
+                                    <img src="./assets/relic.webp" alt="">
+                                    <div class="about">
+                                        <div class="status-color orange"></div>
+                                        <span>Lith G11</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./script.js"></script>
+    </div>
+</body>
+</html>
