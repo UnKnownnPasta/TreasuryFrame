@@ -224,7 +224,7 @@ body, html {
 
             .parts {
                 display: grid;
-                /* overflow-y: scroll; */
+                overflow-y: scroll;
                 width: auto;
                 height: 100%;
                 background-color: rgb(61, 61, 61);
@@ -245,34 +245,71 @@ body, html {
                     align-items: center;
                     justify-content: center;
 
-                    img {
-                        width: 90px;
-                        height: 90px;
-                        padding: 10px;
-                        padding-top: 0;
-                        object-fit: contain;
+                    &.marked {
+                        border-color: rgb(58, 181, 58);
                     }
 
-                    .about {
+                    .topinfo {
                         display: flex;
                         flex-direction: row;
+                        justify-items: center;
                         align-items: center;
-                        justify-content: center;
-                        gap: 10px;
+                        gap: 80px;
 
-                        .status-color {
-                            width: 20px;
-                            height: 20px;
-
-                            &.ed { background-color: purple; }
-                            &.red { background-color: red; }
-                            &.orange { background-color: orange; }
-                            &.yellow { background-color: yellow; }
-                            &.green { background-color: green; }
+                        .owned {
+                            color: white;
+                            font-size: 17px;
+                            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                            text-decoration: underline dotted #ccc;
                         }
 
-                        span {
-                            color: white;
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            object-fit: contain;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .bottominfo {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        height: 70%;
+                        width: 100%;
+
+                        img {
+                            width: 90px;
+                            height: 90px;
+                            padding: 10px;
+                            padding-top: 0;
+                            object-fit: contain;
+                        }
+
+                        .about {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: row;
+                            width: 90%;
+                            gap: 10px;
+    
+                            .status-color {
+                                width: 20px;
+                                height: 20px;
+    
+                                &.ed { background-color: purple; }
+                                &.red { background-color: red; }
+                                &.orange { background-color: orange; }
+                                &.yellow { background-color: yellow; }
+                                &.green { background-color: green; }
+                            }
+    
+                            span {
+                                color: white;
+                                word-wrap: break-word;
+                            }
                         }
                     }
                 }
