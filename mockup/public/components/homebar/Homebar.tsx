@@ -12,19 +12,19 @@ const Homebar: React.FC<HomebarArgs> = ({ expanded, setExpansion }) => {
         <>
             <div className="homebar">
                 <div className="logo" id="tflogo">
-                    <img src="/TreasuryFrame.png" alt="" onClick={() => setExpansion(!expanded)}/>
+                    <img src="/img/TreasuryFrame.png" alt="" onClick={() => setExpansion(!expanded)}/>
                 </div>
                 <div className={expanded ? "text" : "text collapsed"}>TreasuryFrame</div>
                 <div className="userinfo">
-                    <img src="/avatar.png" alt="" />
+                    <img src="/img/avatar.png" alt="" />
                     <span>Username</span>
                 </div>
                 <div className="helper">
-                    <img src="/info.png" alt="" />
-                    <img src="/discord.webp" alt="" />
-                    <img src="/minimize.png" alt="" />
-                    <img src="/maximize.png" alt="" />
-                    <img src="/exit.png" alt="" />
+                    <img src="/img/info.png" alt="" />
+                    <img src="/img/discord.webp" alt="" />
+                    <img src="/img/minimize.png" alt="" />
+                    <img src="/img/maximize.png" alt="" />
+                    <img src="/img/exit.png" alt="" />
                 </div>
             </div>
         </>
