@@ -1,3 +1,4 @@
+import RelicView from "../../../components/Relic/Relic";
 import { Title } from "../../../components/Title";
 import { DesktopHeader } from "./DesktopHeader";
 import "./styles/Screen.css";
@@ -15,6 +16,7 @@ const Screen = () => {
 						<br />
 					</Title>
 				</header>
+				<RelicView />
 			</div>
 		</div>
 	);

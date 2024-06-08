@@ -21,6 +21,8 @@
     "@redux-devtools/remote": "^0.9.3",
     "@reduxjs/toolkit": "^2.2.5",
     "@types/react-redux": "^7.1.33",
+    "axios": "^1.7.2",
+    "lzma-web": "^3.0.1",
     "overwolf-hooks": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@overwolf/types": "^3.24.7",
+    "@types/node": "^20.12.13",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",

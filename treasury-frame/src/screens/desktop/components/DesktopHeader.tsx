@@ -37,6 +37,11 @@ export const DesktopHeader = () => {
 
 	useEffect(updateDragWindow, [updateDragWindow]);
 
+	const owops: overwolf.media.MemoryScreenshotParams = {roundAwayFromZero: true, crop: { x: 500, y:950, width: 225, height: 30 }}
+	const doimg = () => {
+		overwolf.media.takeScreenshot(console.log)
+	}
+
 	return (
 		<header
 			className={"header"}
@@ -50,7 +55,7 @@ export const DesktopHeader = () => {
 			<div className={"header__controls__group"}>
 				<button
 					className={classNames("header__icon header__control header__discord")}
-					onClick={handleDiscordClick}
+					onClick={doimg}
 				>
 					<svg>
 						<use xlinkHref="#window-control_discord" />

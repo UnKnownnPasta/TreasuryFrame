@@ -118,8 +118,7 @@ const parseSafeJSON = <T>(data: string = ""): T | null => {
 	}
 };
 
-// @ts-ignore
-const isDev = process.env.NODE_ENV === "development";
+const isDev = import.meta.env.DEV;
 
 export {
 	classNames,

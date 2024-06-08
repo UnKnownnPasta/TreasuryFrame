@@ -12,7 +12,7 @@
 		"window_icon": "./img/TreasuryFrame-300.png",
 		"description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 	},
-	"permissions": ["GameInfo"],
+	"permissions": ["GameInfo", "FileSystem"],
 	"data": {
 		"game_targeting": {
 			"type": "dedicated",

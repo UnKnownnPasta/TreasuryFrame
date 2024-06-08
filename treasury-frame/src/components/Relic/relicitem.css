@@ -1,0 +1,82 @@
+.relic-item {
+    width: 170px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    border-width: 1px;
+    border-color: #bbbdb9;
+    border-style: solid;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    &.marked {
+        border-color: rgb(58, 158, 181);
+    }
+
+    .topinfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 85%;
+
+        .owned {
+            color: #9b8861;
+            font-size: 17px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-decoration: underline dotted #715928;
+        }
+
+        /* can use for intact/rad/etc */
+        img { 
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+    }
+
+    .bottominfo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 70%;
+        width: 100%;
+
+        img {
+            width: 90px;
+            height: 90px;
+            padding: 10px;
+            padding-top: 0;
+            object-fit: contain;
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            width: 90%;
+            gap: 10px;
+
+            .status-color {
+                width: 13%;
+                height: 20px;
+
+                &.ed { background-color: purple; }
+                &.red { background-color: red; }
+                &.orange { background-color: orange; }
+                &.yellow { background-color: yellow; }
+                &.green { background-color: green; }
+            }
+
+            span {
+                color: #9b8861;
+                word-wrap: break-word;
+            }
+        }
+    }
+}

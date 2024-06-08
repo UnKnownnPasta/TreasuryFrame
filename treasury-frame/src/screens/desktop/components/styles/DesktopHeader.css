@@ -46,13 +46,14 @@
 .header__title {
     color: var(--primary-color-text);
     margin-left: 5px;
-    margin-top: 3px;
+    margin-top: 6px;
     font-size: var(--font-size-medium);
 }
 
 .header__controls__group {
     margin-left: auto;
     display: flex;
+    align-items: center;
     --color: var(--primary-color-text);
     --color-hover: var(--primary-color-light);
     --bg-color-hover: var(--primary-color-dark);
