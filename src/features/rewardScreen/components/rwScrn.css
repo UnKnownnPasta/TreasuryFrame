@@ -1,0 +1,50 @@
+.ingame__line {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    font-family: monospace;
+}
+
+.ingame__line__stock {
+    border-radius: 4px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+    font-weight: bold;
+    background-color: #2c5082;
+    color: white;
+}
+
+.ingame__line__status {
+    border-radius: 4px;
+    padding: 5px;
+    margin-right: 8px;
+    margin-left: 3px;
+    
+    &.ED {
+        background-color: rgb(128, 0, 128);
+    }
+    &.RED {
+        background-color: rgb(255, 0, 0);
+    }
+    &.ORANGE {
+        background-color: rgb(255, 69, 0);
+    }
+    &.YELLOW {
+        background-color: rgb(197, 197, 12);
+    }
+    &.GREEN {
+        background-color: rgb(0, 128, 0);
+    }
+}
+
+.ingame__line__part {
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: white;
+    background-color: #004ba0;
+}
