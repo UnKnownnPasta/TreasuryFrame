@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# TreasuryFrame
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TreasuryFrame is an open-source Overwolf app that helps you manage your resources and parts in Warframe. It's built with modern web technologies like React, Redux, and TypeScript.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Resource tracking: Keep an eye on your resources and receive notifications when you're low on a specific resource.
+* Part tracking: Keep track of your parts and receive notifications when you have enough parts to craft a specific item.
+* Fissure tracking: Keep track of your fissures and receive notifications when a fissure is about to close.
+* In-game overlay: View your resources and parts in-game, without having to alt-tab.
 
-## Expanding the ESLint configuration
+## Building
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To build the app, run `npm run build` in the root directory of the project. This will create a `build` folder with the compiled app.
 
-- Configure the top-level `parserOptions` property like this:
+## Running
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To run the app, run `npm run start` in the root directory of the project. This will start the app in development mode.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Contributing
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Contributions are welcome! If you'd like to contribute, please open a pull request with your changes.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## License
+
+TreasuryFrame is licensed under the MIT license. See the LICENSE file for more information.
