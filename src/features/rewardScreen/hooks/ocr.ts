@@ -96,7 +96,7 @@ export function detectEdgesAndGetBoxes(imageSrcId: HTMLCanvasElement) {
     const newBoxes = predictBoxBounds(setBoxes, 1366);
     const boxes = [];
 
-    const shiftValueUno = 135;
+    const shiftValueUno = 130;
     const shiftValueDos = 145;
 
     for (const oldRect of newBoxes) {
@@ -106,16 +106,19 @@ export function detectEdgesAndGetBoxes(imageSrcId: HTMLCanvasElement) {
         const newY = y + shiftValueUno;
         const newHeight = height - shiftValueUno;
 
-        const rect = { x, y: newY, width, height: newHeight };
-
-        boxes.push(rect);
+        if (newHeight > 0) {
+            const rect = { x, y: newY, width, height: newHeight };
+            boxes.push(rect);
+        }
 
         // Second Shift
         const newY2 = y + shiftValueDos;
         const newHeight2 = height - shiftValueDos;
-        const newRect = { x, y: newY2, width, height: newHeight2 };
-
-        boxes.push(newRect);
+        
+        if (newHeight2 > 0) {
+            const newRect = { x, y: newY2, width, height: newHeight2 };
+            boxes.push(newRect);
+        }
     }
 
     // Clean up
