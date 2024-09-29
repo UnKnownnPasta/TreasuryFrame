@@ -19,10 +19,10 @@ const initialState: ItemDataState = {
 };
 
 const itemDataSlice = createSlice({
-  name: "itmdataScreen",
+  name: "itemdataScreen",
   initialState,
   reducers: {
-    setReilcArcanes(state, action: PayloadAction<Array<ItemData>>) {
+    setRelicArcanes(state, action: PayloadAction<Array<ItemData>>) {
       if (action.payload) {
         state.RelicArcanes = action.payload;
       }
@@ -40,6 +40,6 @@ const itemDataSlice = createSlice({
   },
 });
 
-export const { setReilcArcanes, setWarframes, setWeapons } = itemDataSlice.actions;
+export const { setRelicArcanes, setWarframes, setWeapons } = itemDataSlice.actions;
 
 export default itemDataSlice.reducer;
