@@ -19,6 +19,7 @@ interface SheetRelicData {
 interface SheetPartData {
   item: string;
   stock: string;
+  color?: string;
 }
 
 type SheetRelicInfo = [

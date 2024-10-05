@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ItemDataState {
     RelicArcanes: Array<ItemData>;
     PrimeData: Array<ItemData>;
+    ResourceData: Array<ItemData>;
 }
 
 const initialState: ItemDataState = {
     RelicArcanes: [],
     PrimeData: [],
+    ResourceData: [],
 };
 
 const itemDataSlice = createSlice({
@@ -24,9 +26,14 @@ const itemDataSlice = createSlice({
         state.PrimeData = action.payload;
       }
     },
+    setResourceData(state, action: PayloadAction<Array<ItemData>>) {
+      if (action.payload) {
+        state.ResourceData = action.payload;
+      }
+    },
   },
 });
 
-export const { setRelicArcanes, setPrimeData } = itemDataSlice.actions;
+export const { setRelicArcanes, setPrimeData, setResourceData } = itemDataSlice.actions;
 
 export default itemDataSlice.reducer;

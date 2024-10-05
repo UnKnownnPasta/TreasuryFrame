@@ -10,7 +10,7 @@ const ItemView = () => {
     const { parts, relics } = useSelector(
         (state: RootReducer) => state.relic,
     )
-    const { PrimeData, RelicArcanes } = useSelector(
+    const { PrimeData, RelicArcanes, ResourceData } = useSelector(
         (state: RootReducer) => state.itemData,
     )
 
@@ -21,34 +21,49 @@ const ItemView = () => {
         : num > 31 && num <= 64 ? 'YELLOW'
         : num > 64 ? 'GREEN' : '';
 
-    const itemsArray = inventory.map((data) => {
-        const relic = relics.find((relic) => relic.name === data.ItemType);
-        const part = parts.find((part) => part.item === data.ItemType);
-        
-        if (relic) {
-            return {
-                item: RelicArcanes.find((r) => r.ItemInternal === relic.name)?.ItemPlayer ?? "#NF",
-                stock: stockRange(data.ItemCount),
-                color: relic.tokens
-            }
-        } else if (part) {
-            return {
-                item: PrimeData.find((p) => p.ItemInternal === part.item)?.ItemPlayer ?? "#NF",
-                stock: stockRange(data.ItemCount),
-            }
-        } else {
-            return {
-                item: data.ItemType,
-                stock: stockRange(data.ItemCount),
-            }
+    const isRelicType = (item: string) => item.startsWith("/Lotus/Types/Game/Projections/");
+    const isPrimeType = (item: string) => item.startsWith("/Lotus/Types/Recipes");
+    const isResourceType = (item: string) => item.startsWith("/Lotus/Types/Items/MiscItems/");
+
+    const RelicItemArray = [];
+    const PrimeItemArray = [];
+    const ResourceArray = [];
+
+    for (const entry of inventory) {
+        if (isRelicType(entry.ItemType)) {
+            const relicItself = RelicArcanes.find((r) => r.ItemInternal === entry.ItemType);
+            if (!relicItself) continue;
+
+            const relicEntry = relics.find((r) => r.name === relicItself.ItemPlayer);
+            RelicItemArray.push({
+                item: relicItself?.ItemPlayer ?? "#NF",
+                stock: stockRange(relicEntry?.rewards.length ?? 0),
+                color: "#R"
+            })
+        } else if (isPrimeType(entry.ItemType)) {
+            const primeItself = PrimeData.find((p) => p.ItemInternal === entry.ItemType);
+            if (!primeItself) continue;
+
+            const primeEntry = parts.find((p) => p.item === primeItself.ItemPlayer);
+            PrimeItemArray.push({
+                item: primeItself?.ItemPlayer ?? "#NF",
+                stock: stockRange(parseInt(primeEntry?.stock ?? "0")),
+                color: "#F"
+            })
+        } else if (isResourceType(entry.ItemType)) {
+            ResourceArray.push({
+                item: ResourceData.find((p) => p.ItemInternal === entry.ItemType)?.ItemPlayer ?? "#NF",
+                stock: stockRange(entry.ItemCount),
+                color: "#S"
+            })
         }
-    });
+    }
 
     return (
         <div className='itemView'>
-            <ItemList itemsArray={itemsArray} itemType='Items'/>
-            <ItemList itemsArray={itemsArray} itemType='Monsters'/>
-            <ItemList itemsArray={itemsArray} itemType='Spells'/>
+            <ItemList itemsArray={RelicItemArray} itemType='Relics'/>
+            <ItemList itemsArray={PrimeItemArray} itemType='Primes'/>
+            <ItemList itemsArray={ResourceArray} itemType='Resources'/>
         </div>
     )
 }
