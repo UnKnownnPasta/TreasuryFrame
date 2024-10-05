@@ -23,8 +23,13 @@ const BackgroundWindow = () => {
     
     const { start, stop } = useGameEventProvider(
         {
-            // @ts-ignore
-            onInfoUpdates: (info) => store.dispatch(setInventory(sanitizeJsonString(info.info.match_info?.inventory ?? "{}"))),
+            onInfoUpdates: (info) => {
+                try {
+                    // @ts-ignore
+                    const jsonData = sanitizeJsonString(info.info.match_info?.inventory ?? "{}");
+                    if (jsonData) store.dispatch(setInventory(jsonData));
+                } catch (error) {}
+            },
             onNewEvents: () => null, //warframe has no event-based updates
         },
         REQUIRED_FEATURES,
