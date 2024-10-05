@@ -1,6 +1,6 @@
 import './styles/item.css';
 
-const item = ({ item, stock }: SheetPartData) => {
+const item = ({ item, stock, color }: SheetPartData) => {
     return (
         <div className='item'>
             <div className="item__header">
@@ -8,7 +8,7 @@ const item = ({ item, stock }: SheetPartData) => {
             </div>
             <div className="item__footer">
                 <span>{stock}x Owned</span>
-                <span>Extreme Danger</span>
+                <span>{color}</span>
             </div>
         </div>
     )

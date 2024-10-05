@@ -9,7 +9,7 @@ const ItemList = ({ itemsArray, itemType }: { itemsArray: SheetPartData[], itemT
             </div>
             <div className="itemList__div">
                 {itemsArray.map((item, index) => 
-                    <Item key={index} item={item.item} stock={item.stock}/>
+                    <Item key={index} item={item.item} stock={item.stock} color={item.color}/>
                 )}
             </div>
         </div>

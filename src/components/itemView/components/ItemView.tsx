@@ -29,32 +29,39 @@ const ItemView = () => {
     const PrimeItemArray = [];
     const ResourceArray = [];
 
+    const ifIsNotNaN = (str: string) => {
+        if (isNaN(parseInt(str))) return 0;
+        return parseInt(str);
+    }
+
     for (const entry of inventory) {
         if (isRelicType(entry.ItemType)) {
             const relicItself = RelicArcanes.find((r) => r.ItemInternal === entry.ItemType);
             if (!relicItself) continue;
 
             const relicEntry = relics.find((r) => r.name === relicItself.ItemPlayer);
+            const lowestStock = relicEntry?.rewards.reduce((a, b) => a.stock < b.stock ? a : b, relicEntry?.rewards[0]);
             RelicItemArray.push({
                 item: relicItself?.ItemPlayer ?? "#NF",
-                stock: stockRange(relicEntry?.rewards.length ?? 0),
-                color: "#R"
+                color: stockRange(ifIsNotNaN(`${lowestStock?.stock}`)),
+                stock: `${entry.ItemCount}`
             })
         } else if (isPrimeType(entry.ItemType)) {
-            const primeItself = PrimeData.find((p) => p.ItemInternal === entry.ItemType);
+            
+            const primeItself = PrimeData.find((p) => p.ItemPlayer === entry.ItemType);
             if (!primeItself) continue;
 
             const primeEntry = parts.find((p) => p.item === primeItself.ItemPlayer);
             PrimeItemArray.push({
                 item: primeItself?.ItemPlayer ?? "#NF",
-                stock: stockRange(parseInt(primeEntry?.stock ?? "0")),
-                color: "#F"
+                color: stockRange(parseInt(primeEntry?.stock ?? "0")),
+                stock: `${entry.ItemCount}`
             })
         } else if (isResourceType(entry.ItemType)) {
             ResourceArray.push({
                 item: ResourceData.find((p) => p.ItemInternal === entry.ItemType)?.ItemPlayer ?? "#NF",
-                stock: stockRange(entry.ItemCount),
-                color: "#S"
+                color: stockRange(entry.ItemCount),
+                stock: `${entry.ItemCount}`
             })
         }
     }

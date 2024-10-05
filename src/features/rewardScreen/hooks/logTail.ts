@@ -26,7 +26,9 @@ class logTail {
         const relicData = await fetchByWeb(8) as RelicData[];
         const warframeData = await fetchByWeb(13) as WarframeData[];
         const weaponData = await fetchByWeb(14) as WeaponData[];
-
+        
+        console.log(relicData);
+        
         if (relicData) {
             const RelicArcanes: ItemData[] = [];
             const PrimeData: ItemData[] = [];
@@ -44,10 +46,22 @@ class logTail {
                     if (PrimeData.find(item => item.ItemInternal === reward.rewardName)) {
                         return;
                     }
-                    PrimeData.push({
-                        ItemInternal: reward.rewardName,
-                        ItemPlayer: (warframeData.find(wf => wf.uniqueName === reward.rewardName)?.name ?? weaponData.find(wp => wp.uniqueName === reward.rewardName)?.name) ?? "#NF",
-                    })
+
+                    const findNameInWarframeData = warframeData.find(item => item.uniqueName === reward.rewardName);
+                    if (findNameInWarframeData) {
+                        PrimeData.push({
+                            ItemInternal: reward.rewardName,
+                            ItemPlayer: findNameInWarframeData.name
+                        })
+                    } else {
+                        const findNameInWeaponData = weaponData.find(item => item.uniqueName === reward.rewardName);
+                        if (findNameInWeaponData) {
+                            PrimeData.push({
+                                ItemInternal: reward.rewardName,
+                                ItemPlayer: findNameInWeaponData.name
+                            })
+                        }
+                    }
                 })
             }
 
