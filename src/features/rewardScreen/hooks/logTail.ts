@@ -93,7 +93,7 @@ class logTail {
                 if (new Date().getTime() - logTail.lastEnd > 12000) {
                     store.dispatch(setRewards("READY"))
                 }
-            } else if (data.content?.includes(logTail.EVENTS.END) || data.content?.includes(logTail.EVENTS.ALTEND)) {
+            } else if (data.content?.includes(logTail.EVENTS.END)) {
                 log("Log tail: Rewards ended", "src/features/rewardScreen/hooks/logTail.ts", "logstart");
                 store.dispatch(setRewards("END"))
                 logTail.lastEnd = new Date().getTime();
