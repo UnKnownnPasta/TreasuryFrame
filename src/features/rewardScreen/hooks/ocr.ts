@@ -232,13 +232,13 @@ export function testForPrimeParts(ocrTextData: string, primeStore: PartData[]): 
         // @ts-ignore
         (e) => e.item,
         // @ts-ignore
-        (e) => [e.item, e.stock]
+        (e) => [e.item]
     );
 
     for (const text of ocrText.split(" | ")) {
-        const result = searcher.getMatches(new fuzzySearch.Query(text, Infinity, 0.55));
+        const result = searcher.getMatches(new fuzzySearch.Query(text, Infinity, 0.65));
 
-        console.log(`OCRTEXT Testing result:`, result);
+        log(`OCRTEXT Testing result: ${result}`, "src/features/rewardScreen/hooks/ocr.ts", "testForPrimeParts");
         for (const match of result.matches) {
             resultArr.push(`${primeStore.find(p => p.item === match.matchedString)?.stock ?? 0}x|${match.matchedString}`);
         }
