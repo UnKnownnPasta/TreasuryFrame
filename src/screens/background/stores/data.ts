@@ -8,14 +8,12 @@ interface ItemData {
 
 interface ItemDataState {
     RelicArcanes: Array<ItemData>;
-    Warframes: Array<ItemData>;
-    Weapons: Array<ItemData>;
+    PrimeData: Array<ItemData>;
 }
 
 const initialState: ItemDataState = {
     RelicArcanes: [],
-    Warframes: [],
-    Weapons: [],
+    PrimeData: [],
 };
 
 const itemDataSlice = createSlice({
@@ -27,19 +25,14 @@ const itemDataSlice = createSlice({
         state.RelicArcanes = action.payload;
       }
     },
-    setWarframes(state, action: PayloadAction<Array<ItemData>>) {
+    setPrimeData(state, action: PayloadAction<Array<ItemData>>) {
       if (action.payload) {
-        state.Warframes = action.payload;
-      }
-    },
-    setWeapons(state, action: PayloadAction<Array<ItemData>>) {
-      if (action.payload) {
-        state.Weapons = action.payload;
+        state.PrimeData = action.payload;
       }
     },
   },
 });
 
-export const { setRelicArcanes, setWarframes, setWeapons } = itemDataSlice.actions;
+export const { setRelicArcanes, setPrimeData } = itemDataSlice.actions;
 
 export default itemDataSlice.reducer;

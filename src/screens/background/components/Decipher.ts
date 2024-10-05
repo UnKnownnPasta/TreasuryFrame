@@ -1,6 +1,7 @@
 import axios from 'axios';
 //@ts-ignore
-import lzma from 'lzma';
+// import lzma from 'lzma';
+import LZMA from 'lzma-web';
 import { log } from '../../../lib/log';
 
 /**
@@ -8,7 +9,7 @@ import { log } from '../../../lib/log';
  * @param line which export to fetch (by line number)
  * @returns exported data in JSON format
  */
-export async function fetchByWeb(line: number): Promise<Object | null> {
+export async function fetchByWeb(line: number): Promise<Object[] | null> {
 	const response = await axios.get(
 		`https://origin.warframe.com/PublicExport/index_en.txt.lzma`,
 		{ responseType: "arraybuffer" }
@@ -18,24 +19,21 @@ export async function fetchByWeb(line: number): Promise<Object | null> {
         return null;
 	}
 
-    let result = null;
+	const lzma = new LZMA();
+	let result = await lzma.decompress(new Uint8Array(response.data));
 
-	await lzma.LZMA().decompress(new Uint8Array(response.data),
-		async (res: string, err: Object) => {
-			if (!err) {
-				const extract_en_data = res.split("\n")[line];
+	if (result && typeof result === "string") {
+		const extract_en_data = result.split("\n")[line];
 
-				const schemaResponse = await axios.get(
-					`http://content.warframe.com/PublicExport/Manifest/${extract_en_data}`
-				);
-				const schemaData = schemaResponse.data.replace(/\r\n|\r/g, "\\n");
+		const schemaResponse = await axios.get(
+			`http://content.warframe.com/PublicExport/Manifest/${extract_en_data}`
+		);
+		const schemaData = schemaResponse.data.replace(/\r\n|\r/g, "\\n");
+		
+		return Object.values(JSON.parse(schemaData))[0] as Object[];
+	} else {
+		console.error("LZMA Error", "src/screens/background/components/GSFetch.tsx", "fetchByWeb");
 
-                result = JSON.parse(schemaData)["ExportRelicArcane"];
-			} else {
-				console.error(err);
-			}
-		}
-	)
-
-    return result;
+		return [];
+	}
 }

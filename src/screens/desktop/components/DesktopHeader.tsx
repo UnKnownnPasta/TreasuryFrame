@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, Dispatch, SetStateAction } from "react";
 import {
     WINDOW_NAMES,
     DISPLAY_OVERWOLF_HOOKS_LOGS,
@@ -9,13 +9,14 @@ import { SVGComponent } from "./DesktopHeaderSVG";
 import "./styles/DesktopHeader.css";
 
 const { DESKTOP, BACKGROUND } = WINDOW_NAMES;
+type windowViewStateType = "MAIN" | "SETTINGS"
 
 const handleDiscordClick = () => {
     if (isDev) return window.open("https://discord.gg/");
     overwolf.utils.openUrlInDefaultBrowser("https://discord.gg/");
 };
 
-export const DesktopHeader = () => {
+export const DesktopHeader = ({ setWindowView }: { setWindowView: Dispatch<SetStateAction<windowViewStateType>> }) => {
     const [isMaximized, setMaximized] = useState(false);
     const [desktopWindow] = useWindow(DESKTOP, DISPLAY_OVERWOLF_HOOKS_LOGS);
     const [backgroundWindow] = useWindow(BACKGROUND, DISPLAY_OVERWOLF_HOOKS_LOGS);
@@ -34,15 +35,16 @@ export const DesktopHeader = () => {
 
     useEffect(updateCurrentWindowID, [updateCurrentWindowID]);
 
+    //onClick={() => window.location.href = "overwolf://settings"}
     return (
         <header className="header" onMouseDown={onDragStart} onMouseMove={onMouseMove}>
             <SVGComponent />
-            <h1 className="header__title">⛏ TreasuryFrame</h1>
+            <h1 className="header__title">💰 TreasuryFrame</h1>
             <div className="header__controls__group">
                 <button className="header__icon header__control header__discord" onClick={handleDiscordClick}>
                     <svg><use xlinkHref="#window-control_discord" /></svg>
                 </button>
-                <button className="header__icon header__control" onClick={() => window.location.href = "overwolf://settings"}>
+                <button className="header__icon header__control" onClick={() => setWindowView("SETTINGS")}>
                     <svg><use xlinkHref="#window-control_settings" /></svg>
                 </button>
                 <button className="header__icon header__control">

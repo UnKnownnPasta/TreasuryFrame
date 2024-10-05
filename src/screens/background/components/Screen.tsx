@@ -43,10 +43,10 @@ const BackgroundWindow = () => {
             const warframe = await getWarframeGame();
             if (warframe) {
                 const [relicData, partData] = await updateRelicInfo();
-                logTail.start();
 
                 store.dispatch(setRelic(relicData));
                 store.dispatch(setPart(partData));
+                await logTail.start();
 
                 await Promise.all([
                     start(),

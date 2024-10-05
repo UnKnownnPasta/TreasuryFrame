@@ -29,6 +29,7 @@ const RwScrn = ({ vsb }: rwSrcnProps) => {
     useEffect(() => {
         if (rewards === "READY" || rewards === "START") {
             log(`Rewards: ${rewards}`, "src/features/rewardScreen/components/rwScrn.tsx", "useEffect");
+            vsb(true);
             overwolf.media.takeScreenshot(
                 async (result) => {
                     if (!result.success) return;
@@ -37,11 +38,6 @@ const RwScrn = ({ vsb }: rwSrcnProps) => {
                     const res = await ocr(result.url);
                     const testData = testForPrimeParts(res.join(" | "), parts);
                     setOcrResult(ocrResult => [... new Set([...ocrResult, ...testData])]);
-                    vsb(true);
-                    setTimeout(() => {
-                        vsb(false);
-                        setOcrResult([])
-                    }, 20000);
                 }
             )
         } else if (rewards === "END") {

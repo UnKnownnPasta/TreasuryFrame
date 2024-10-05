@@ -10,6 +10,9 @@ const ItemView = () => {
     const { parts, relics } = useSelector(
         (state: RootReducer) => state.relic,
     )
+    const { PrimeData, RelicArcanes } = useSelector(
+        (state: RootReducer) => state.itemData,
+    )
 
     const stockRange = (num: number): string => 
         num >= 0 && num <= 9 ? 'ED'
@@ -24,13 +27,13 @@ const ItemView = () => {
         
         if (relic) {
             return {
-                item: relic.name,
+                item: RelicArcanes.find((r) => r.ItemInternal === relic.name)?.ItemPlayer ?? "#NF",
                 stock: stockRange(data.ItemCount),
                 color: relic.tokens
             }
         } else if (part) {
             return {
-                item: part.item,
+                item: PrimeData.find((p) => p.ItemInternal === part.item)?.ItemPlayer ?? "#NF",
                 stock: stockRange(data.ItemCount),
             }
         } else {

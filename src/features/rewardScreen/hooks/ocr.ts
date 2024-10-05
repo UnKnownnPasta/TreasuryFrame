@@ -30,6 +30,7 @@ function predictBoxBounds(boxes: boxType[], imageWidth: number): boxType[] {
 
         // Predict box to the right
         const rightX = rect.x + rect.width;
+        const rightXTwo = rect.x + 2 * rect.width;
         if (rightX + rect.width <= imageWidth && !boxExists(rightX, rect.y, rect.width, rect.height)) {
             newBoxes.push({
                 x: rightX,
@@ -38,12 +39,29 @@ function predictBoxBounds(boxes: boxType[], imageWidth: number): boxType[] {
                 height: rect.height,
             });
         }
+        if (rightXTwo + rect.width <= imageWidth && !boxExists(rightXTwo, rect.y, rect.width, rect.height)) {
+            newBoxes.push({
+                x: rightXTwo,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height,
+            });
+        }
 
         // Predict box to the left
         const leftX = rect.x - rect.width;
+        const leftXTwo = rect.x - 2 * rect.width;
         if (leftX >= 0 && !boxExists(leftX, rect.y, rect.width, rect.height)) {
             newBoxes.push({
                 x: leftX,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height,
+            });
+        }
+        if (leftXTwo >= 0 && !boxExists(leftXTwo, rect.y, rect.width, rect.height)) {
+            newBoxes.push({
+                x: leftXTwo,
                 y: rect.y,
                 width: rect.width,
                 height: rect.height,
@@ -96,8 +114,8 @@ export function detectEdgesAndGetBoxes(imageSrcId: HTMLCanvasElement) {
     const newBoxes = predictBoxBounds(setBoxes, 1366);
     const boxes = [];
 
-    const shiftValueUno = 130;
-    const shiftValueDos = 145;
+    const shiftValueUno = 125;
+    const shiftValueDos = 123;
 
     for (const oldRect of newBoxes) {
         const { x, y, width, height } = oldRect;
@@ -138,7 +156,7 @@ export async function ocr(PATH: string) {
 
     const worker = await createWorker("eng");
     await worker.setParameters({
-        tessedit_char_whitelist: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ",
+        tessedit_char_whitelist: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ &",
     });
 
     const rectangles: boxType[] = [];
@@ -176,16 +194,17 @@ export async function ocr(PATH: string) {
     }
 
     await worker.terminate();
+    const filePathInFolder = `${PATH.split('/')[-1]?.replace(/\+/gi, " ")}`
 
     try {
         overwolf.extensions.io.delete(
             // @ts-ignore
             overwolf.extensions.io.enums.StorageSpace.pictures,
-            PATH.split('/')[-1]?.replace(/\+/gi, " ") ?? "",
+            filePathInFolder,
             console.log
         )
     } catch (error) {
-        log(`Error deleting ${PATH}`, "src/features/rewardScreen/hooks/ocr.ts", "ocr")    
+        log(`Error deleting ${filePathInFolder}`, "src/features/rewardScreen/hooks/ocr.ts", "ocr")    
     }
     return values;
 }
@@ -217,7 +236,7 @@ export function testForPrimeParts(ocrTextData: string, primeStore: PartData[]): 
     );
 
     for (const text of ocrText.split(" | ")) {
-        const result = searcher.getMatches(new fuzzySearch.Query(text, Infinity, 0.65));
+        const result = searcher.getMatches(new fuzzySearch.Query(text, Infinity, 0.55));
 
         console.log(`OCRTEXT Testing result:`, result);
         for (const match of result.matches) {
