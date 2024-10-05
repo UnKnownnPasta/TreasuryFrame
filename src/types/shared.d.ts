@@ -3,6 +3,12 @@ interface ItemData {
     ItemPlayer: string;
 }
 
+interface ItemType2 {
+    ItemType: string;
+    ItemCount: number;
+    ProductCategory?: string;
+}
+
 interface rewards {
     rewardName: string;
     rarity: "RARE" | "UNCOMMON" | "COMMON";
@@ -16,6 +22,19 @@ interface RelicData {
     relicRewards: rewards[];
     description: string;
     codexSecret: boolean;
+}
+
+interface RecipesData {
+    uniqueName: string;
+    resultType: string;
+    buildPrice: number;
+    buildTime: number;
+    skipBuildTimePrice: number;
+    consumeOnUse: boolean;
+    num: number;
+    codexSecret: boolean;
+    ingredients: ItemType2[];
+    secretIngredients: ItemType2[];
 }
 
 interface Ability {
