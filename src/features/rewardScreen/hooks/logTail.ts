@@ -28,10 +28,6 @@ class logTail {
         const warframeData = await fetchByWeb(13) as WarframeData[];
         const weaponData = await fetchByWeb(14) as WeaponData[];
         
-        console.log(relicData);
-        console.log(weaponData);
-        console.log(warframeData);
-
         if (relicData) {
             const RelicArcanes: ItemData[] = [];
             const PrimeData: ItemData[] = [];
