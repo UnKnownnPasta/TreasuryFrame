@@ -25,6 +25,8 @@ class logTail {
 
         log("Fetching Warframe ItemData.", "src/features/rewardScreen/hooks/logTail.ts >> background/components/Decipher.ts", "logstart");
         const relicData = await fetchByWeb(8) as RelicData[];
+        const recipesData = await fetchByWeb(6) as RecipesData[];
+
         const warframeData = await fetchByWeb(13) as WarframeData[];
         const weaponData = await fetchByWeb(14) as WeaponData[];
         
@@ -46,23 +48,13 @@ class logTail {
                 });
             }
 
-            for (const item of warframeData) {
-                if (PrimeData.find(prime => prime.ItemInternal === item.uniqueName.replace("/StoreItems/", "/"))) {
+            for (const item of recipesData) {
+                if (PrimeData.find(prime => prime.ItemInternal === item.uniqueName)) {
                     continue;
                 }
                 PrimeData.push({
-                    ItemInternal: item.uniqueName.replace("/StoreItems/", "/"),
-                    ItemPlayer: item.name
-                });
-            }
-
-            for (const item of weaponData) {
-                if (PrimeData.find(prime => prime.ItemInternal === item.uniqueName.replace("/StoreItems/", "/"))) {
-                    continue;
-                }
-                PrimeData.push({
-                    ItemInternal: item.uniqueName.replace("/StoreItems/", "/"),
-                    ItemPlayer: item.name
+                    ItemInternal: item.uniqueName,
+                    ItemPlayer: "Unknown."
                 });
             }
 
