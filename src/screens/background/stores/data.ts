@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-interface ItemData {
-    ItemInternal: string;
-    ItemPlayer: string;
-}
-
 interface ItemDataState {
     RelicArcanes: Array<ItemData>;
     PrimeData: Array<ItemData>;

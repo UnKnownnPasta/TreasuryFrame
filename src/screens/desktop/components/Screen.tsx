@@ -5,8 +5,6 @@ import "./styles/Screen.css";
 import Settings from "../../../features/settings";
 import { Loading } from "../../../components/Loading";
 
-type windowViewStateType = "MAIN" | "SETTINGS"
-
 //avoid the use of static text, use i18n instead, each language has its own text, and the text is stored in the
 //locales folder in the project root
 const Screen = () => {

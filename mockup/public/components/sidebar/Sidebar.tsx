@@ -1,6 +1,5 @@
 import React from 'react';
 import './sidebar.css';
-import { getGameInfo } from '../../lib/game-info';
 
 interface SidebarProp {
     expanded: boolean

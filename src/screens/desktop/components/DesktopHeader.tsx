@@ -9,7 +9,6 @@ import { SVGComponent } from "./DesktopHeaderSVG";
 import "./styles/DesktopHeader.css";
 
 const { DESKTOP, BACKGROUND } = WINDOW_NAMES;
-type windowViewStateType = "MAIN" | "SETTINGS"
 
 const handleDiscordClick = () => {
     if (isDev) return window.open("https://discord.gg/");

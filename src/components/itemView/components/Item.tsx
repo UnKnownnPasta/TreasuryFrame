@@ -1,11 +1,6 @@
 import './styles/item.css';
 
-interface PartData {
-    item: string;
-    stock: string;
-}
-
-const item = ({ item, stock }: PartData) => {
+const item = ({ item, stock }: SheetPartData) => {
     return (
         <div className='item'>
             <div className="item__header">

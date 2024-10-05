@@ -2,34 +2,6 @@ import axios from 'axios';
 import { log } from '../../../lib/log';
 // import { useInternetConnection } from '../../../features/misc';
 
-type sheetParameters = {
-    spreadsheetId: string,
-    range: string,
-}
-
-type relicRewards = {
-    item: string,
-    stock: string,
-    color: string,
-}
-
-interface RelicData {
-  name: string;
-  rewards: relicRewards[];
-  tokens: string;
-  vaulted: boolean;
-}
-
-interface PartData {
-  item: string;
-  stock: string;
-}
-
-type RelicInfo = [
-    RelicData: RelicData[],
-    PartData: PartData[],
-]
-
 
 const googleSheets = async ({ spreadsheetId, range }: sheetParameters) => {
     return axios
@@ -54,7 +26,7 @@ const colorRange = (num: number) => {
     return defaultColor;
 };
 
-export async function updateRelicInfo(): Promise<RelicInfo> {
+export async function updateRelicInfo(): Promise<SheetRelicInfo> {
     const sheetValues: string = await googleSheets({ 
         spreadsheetId: import.meta.env.VITE_GS_SHEETID,
         range: 'Sheet1!A2:I1000',
@@ -65,8 +37,8 @@ export async function updateRelicInfo(): Promise<RelicInfo> {
 
     const values: string[] = sheetValues?.split(/\r?\n/);
 
-    const allRelicData: RelicData[] = [];
-    let allPartData: PartData[] = [];
+    const allRelicData: SheetRelicData[] = [];
+    let allPartData: SheetPartData[] = [];
 
     if (values?.[0] === "#ERROR!") {
         log(
@@ -84,7 +56,7 @@ export async function updateRelicInfo(): Promise<RelicInfo> {
                 vaultedText, tokens, name, item1, item2, item3, item4, item5, item6
             ] = row.split(",")
 
-            const rewards: relicRewards[] = [];
+            const rewards: sheetRelicRewards[] = [];
 
             const vaulted = vaultedText == 'TRUE' ? true : false;
 

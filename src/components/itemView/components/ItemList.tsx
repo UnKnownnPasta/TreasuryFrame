@@ -1,12 +1,7 @@
 import Item from './Item';
 import './styles/itemList.css'
 
-interface PartData {
-    item: string;
-    stock: string;
-}
-
-const ItemList = ({ itemsArray, itemType }: { itemsArray: PartData[], itemType: string }) => {
+const ItemList = ({ itemsArray, itemType }: { itemsArray: SheetPartData[], itemType: string }) => {
     return (
         <div className='itemList'>
             <div className="itemList__search">
