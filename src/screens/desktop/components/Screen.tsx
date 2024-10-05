@@ -8,7 +8,7 @@ import { Loading } from "../../../components/Loading";
 //avoid the use of static text, use i18n instead, each language has its own text, and the text is stored in the
 //locales folder in the project root
 const Screen = () => {
-    const [currentView, setCurrentView] = useState<windowViewStateType>("SETTINGS")
+    const [currentView, setCurrentView] = useState<windowViewStateType>("MAIN");
 
     return (
         <div className="desktop">
