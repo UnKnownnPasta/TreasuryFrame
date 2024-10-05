@@ -42,6 +42,7 @@ const RwScrn = ({ vsb }: rwSrcnProps) => {
             )
         } else if (rewards === "END") {
             vsb(false);
+            setOcrResult([""]);
         }
     }, [rewards]);
 
