@@ -29,25 +29,20 @@ const ItemView = () => {
     const PrimeItemArray = [];
     const ResourceArray = [];
 
-    const ifIsNotNaN = (str: string) => {
-        if (isNaN(parseInt(str))) return 0;
-        return parseInt(str);
-    }
-
     for (const entry of inventory) {
         if (isRelicType(entry.ItemType)) {
             const relicItself = RelicArcanes.find((r) => r.ItemInternal === entry.ItemType);
             if (!relicItself) continue;
 
-            const relicEntry = relics.find((r) => r.name === relicItself.ItemPlayer);
-            const lowestStock = relicEntry?.rewards.reduce((a, b) => a.stock < b.stock ? a : b, relicEntry?.rewards[0]);
+            const relicEntry = relics.find((r) => r.name === relicItself.ItemPlayer.replace(" Relic", ""));
+            if (!relicEntry) continue;
+            const lowestStock = Math.min(...relicEntry.rewards.map(rw => parseInt(rw.stock ?? "999")));
             RelicItemArray.push({
                 item: relicItself?.ItemPlayer ?? "#NF",
-                color: stockRange(ifIsNotNaN(`${lowestStock?.stock}`)),
+                color: stockRange(lowestStock),
                 stock: `${entry.ItemCount}`
             })
         } else if (isPrimeType(entry.ItemType)) {
-            
             const primeItself = PrimeData.find((p) => p.ItemPlayer === entry.ItemType);
             if (!primeItself) continue;
 
@@ -66,9 +61,19 @@ const ItemView = () => {
         }
     }
 
+    const rankOfStock = ['ED', 'RED', 'ORANGE', 'YELLOW', 'GREEN'];
+
     return (
         <div className='itemView'>
-            <ItemList itemsArray={RelicItemArray} itemType='Relics'/>
+            <ItemList itemsArray={RelicItemArray.sort((a, b) => {
+                const aRank = rankOfStock.indexOf(a.color);
+                const bRank = rankOfStock.indexOf(b.color);
+                if (aRank === bRank) {
+                    return a.stock < b.stock ? -1 : 1;
+                } else {
+                    return aRank < bRank ? -1 : 1;
+                }
+            })} itemType='Relics'/>
             <ItemList itemsArray={PrimeItemArray} itemType='Primes'/>
             <ItemList itemsArray={ResourceArray} itemType='Resources'/>
         </div>
