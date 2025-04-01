@@ -1,14 +1,6 @@
-//Hearthstone Game Events
-//@see Please read the overwolf.games.events documentation page to learn how to use Overwolf game events.
-
-//Heathstone Game Features
-//@see https://overwolf.github.io/docs/api/overwolf-games-events-hearthstone
 export const REQUIRED_FEATURES = [
   "gep_internal",
-  "scene_state",
-  "collection",
-  "decks",
-  "match",
+  "game-info",
   "match-info",
 ];
 export const RETRY_TIMES = 10;

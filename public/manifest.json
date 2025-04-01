@@ -10,24 +10,24 @@
     "icon_gray": "IconMouseNormal.png",
     "launcher_icon": "desktop-icon.ico",
     "window_icon": "TaskbarIcon.png",
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    "description": "Elevate your treasury running experience."
   },
-  "permissions": ["Extensions", "Streaming", "Profile", "GameInfo"],
+  "permissions": ["Extensions", "GameInfo"],
   "data": {
     "game_targeting": {
       "type": "dedicated",
-      "game_ids": [9898]
+      "game_ids": [8954]
     },
     "launch_events": [
       {
         "event": "GameLaunch",
         "event_data": {
-          "game_ids": [9898]
+          "game_ids": [8954]
         },
         "start_minimized": true
       }
     ],
-    "game_events": [9898],
+    "game_events": [8954],
     "start_window": "background",
     "windows": {
       "background": {

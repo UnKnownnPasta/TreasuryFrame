@@ -1,10 +1,10 @@
-export const HEARTHSTONE_CLASS_ID = 9898;
+export const WARFRAME_CLASS_ID = 8954;
 
-export function getHearthstoneGame(): Promise<overwolf.games.GetRunningGameInfoResult | null> {
+export function getWarframeGame(): Promise<overwolf.games.GetRunningGameInfoResult | null> {
   return new Promise((resolve) => {
     overwolf.games.getRunningGameInfo((result) => {
       resolve(
-        result && result.classId === HEARTHSTONE_CLASS_ID ? result : null,
+        result && result.classId === WARFRAME_CLASS_ID ? result : null,
       );
     });
   });
