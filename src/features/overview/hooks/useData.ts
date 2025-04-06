@@ -24,7 +24,7 @@ export const useData = () => {
       infos: {
         quantity: infosQuantity,
         label: `Infos (${getUpdatedAt(
-          infos[infosQuantity - 1]?.timestamp ?? Date.now()
+          Date.now()
         )})`,
       },
     };

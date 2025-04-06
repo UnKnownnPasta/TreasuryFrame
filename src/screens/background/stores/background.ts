@@ -7,20 +7,13 @@ type OwInfo =
   | overwolf.games.events.InfoUpdates2Event
   | overwolf.games.InstalledGameInfo;
 type InfoPayload = PayloadAction<Timestamp & OwInfo>;
-type ParsedStateInfoData = {
-  ItemName: string;
-  ItemCount: number;
-};
-// payload type
-type ParsedStateInfoPayload = PayloadAction<Timestamp & ParsedStateInfoData>;
-
 interface BackgroundState {
-  infos: Array<Timestamp & OwInfo>;
-  parsedStateInfos: Array<ParsedStateInfoData>;
+  infos: Array<Object>;
+  parsedStateInfos: Array<Object>;
 }
 
 const initialState: BackgroundState = {
-  infos: [],
+  infos: [] as Array<Object>,
   parsedStateInfos: [],
 };
 
@@ -43,9 +36,9 @@ const backgroundSlice = createSlice({
         infoObject = JSON.parse(gameInfoStr);
       }
 
-      state.infos.push(infoObject);
+      state.infos = infoObject['MiscItems'];
     },
-    setParsedStateInfo(state, action: ParsedStateInfoPayload) {
+    setParsedStateInfo(state, action: PayloadAction<Object>) {
       state.parsedStateInfos.push(action.payload);
     },
   },
