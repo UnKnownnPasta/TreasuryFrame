@@ -12,7 +12,7 @@
     "window_icon": "TaskbarIcon.png",
     "description": "Elevate your treasury running experience."
   },
-  "permissions": ["Extensions", "GameInfo"],
+  "permissions": ["Extensions", "Streaming", "Profile", "GameInfo"],
   "data": {
     "game_targeting": {
       "type": "dedicated",

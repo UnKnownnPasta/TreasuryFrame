@@ -7,9 +7,10 @@ import {
 import { useGameEventProvider, useWindow } from "overwolf-hooks";
 import { useCallback, useEffect } from "react";
 import { WARFRAME_CLASS_ID, getWarframeGame } from "../../../lib/games";
-import { setInfo, setEvent } from "../stores/background";
+import { setInfo } from "../stores/background";
 import store from "../../../app/shared/store";
 import { log } from "../../../lib/log";
+import { getNameTranslations } from '../../../api';
 
 const { DESKTOP, INGAME } = WINDOW_NAMES;
 
@@ -18,20 +19,15 @@ const BackgroundWindow = () => {
   const [ingame] = useWindow(INGAME, DISPLAY_OVERWOLF_HOOKS_LOGS);
   const { start, stop } = useGameEventProvider(
     {
-      onInfoUpdates: (info) =>
+      onInfoUpdates: (info) => {
         store.dispatch(
           setInfo({
             ...info,
             timestamp: Date.now(),
           })
-        ),
-      onNewEvents: (events) =>
-        store.dispatch(
-          setEvent({
-            ...events,
-            timestamp: Date.now(),
-          })
-        ),
+        )
+      },
+      onNewEvents() {},
     },
     REQUIRED_FEATURES,
     RETRY_TIMES,
@@ -43,6 +39,7 @@ const BackgroundWindow = () => {
       if (!desktop || !ingame) return;
       log(reason, "src/screens/background/components/Screen.tsx", "startApp");
       const warframe = await getWarframeGame();
+      await getNameTranslations();
       if (warframe) {
         await Promise.all([start(), ingame?.restore(), desktop?.minimize()]);
       } else {

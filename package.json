@@ -13,6 +13,7 @@
     "@overwolf/types": "^3.24.7",
     "@redux-devtools/remote": "^0.9.5",
     "@reduxjs/toolkit": "^2.6.1",
+    "lzma": "^2.3.2",
     "overwolf-hooks": "^4.1.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

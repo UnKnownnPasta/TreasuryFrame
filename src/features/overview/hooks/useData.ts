@@ -7,27 +7,20 @@ type Attributes = {
   quantity: number;
   label: string;
 };
-type DataLabel = "events" | "infos";
+type DataLabel = "infos";
 type Data = Record<DataLabel, Attributes>;
 
 const getUpdatedAt = (date: number): string => `updated: ${fromNow(date)}`;
 
 export const useData = () => {
-  const { events, infos } = useSelector(
+  const { infos } = useSelector(
     (state: RootReducer) => state.background
   );
 
   const data: Data = useMemo(() => {
-    const eventsQuantity = events.length;
     const infosQuantity = infos.length;
 
     return {
-      events: {
-        quantity: eventsQuantity,
-        label: `Events (${getUpdatedAt(
-          events[eventsQuantity - 1]?.timestamp ?? Date.now()
-        )})`,
-      },
       infos: {
         quantity: infosQuantity,
         label: `Infos (${getUpdatedAt(
@@ -35,7 +28,7 @@ export const useData = () => {
         )})`,
       },
     };
-  }, [events, infos]);
+  }, [infos]);
 
   return data;
 };

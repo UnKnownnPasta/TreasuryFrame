@@ -6,33 +6,51 @@ interface Timestamp {
 type OwInfo =
   | overwolf.games.events.InfoUpdates2Event
   | overwolf.games.InstalledGameInfo;
-type OwEvent = overwolf.games.events.NewGameEvents;
 type InfoPayload = PayloadAction<Timestamp & OwInfo>;
-type EventPayload = PayloadAction<Timestamp & OwEvent>;
+type ParsedStateInfoData = {
+  ItemName: string;
+  ItemCount: number;
+};
+// payload type
+type ParsedStateInfoPayload = PayloadAction<Timestamp & ParsedStateInfoData>;
 
 interface BackgroundState {
-  events: Array<Timestamp & OwEvent>;
   infos: Array<Timestamp & OwInfo>;
+  parsedStateInfos: Array<ParsedStateInfoData>;
 }
 
 const initialState: BackgroundState = {
-  events: [],
   infos: [],
+  parsedStateInfos: [],
 };
 
 const backgroundSlice = createSlice({
   name: "backgroundScreen",
   initialState,
   reducers: {
-    setEvent(state, action: EventPayload) {
-      state.events.push(action.payload);
-    },
     setInfo(state, action: InfoPayload) {
-      state.infos.push(action.payload);
+      // @ts-ignore - Extract String
+      const gameInfo = action.payload.info.match_info["inventory"];
+      let infoObject;
+      try {
+        infoObject = JSON.parse(gameInfo);
+      } catch (e) {
+        const gameInfoStr = gameInfo
+          .replace(/\\/g, '')
+          .replace(/}","/g, '},"')
+          .replace(/}]}","/g, '}]},"')
+          .replace(/":"{"/g, '":{"');
+        infoObject = JSON.parse(gameInfoStr);
+      }
+
+      state.infos.push(infoObject);
+    },
+    setParsedStateInfo(state, action: ParsedStateInfoPayload) {
+      state.parsedStateInfos.push(action.payload);
     },
   },
 });
 
-export const { setEvent, setInfo } = backgroundSlice.actions;
+export const { setInfo, setParsedStateInfo } = backgroundSlice.actions;
 
 export default backgroundSlice.reducer;
