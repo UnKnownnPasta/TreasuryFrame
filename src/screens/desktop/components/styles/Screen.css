@@ -16,13 +16,49 @@ body {
 }
 
 .desktop__container {
-  padding-top: 5px;
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 15vh 65vh 15vh;
+  grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
 }
 
+.desktop__fit {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.desktop__header {
+  background: var(--neutral-1);
+  grid-area: header;
+}
+.desktop__main {
+  background: var(--neutral-2);
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.desktop__aside {
+  background: var(--neutral-3);
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.desktop__footer {
+  background: var(--background-color);
+  grid-area: footer;
+}

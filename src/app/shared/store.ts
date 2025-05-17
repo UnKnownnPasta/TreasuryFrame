@@ -6,8 +6,8 @@ import { isDev } from "../../lib/utils";
 const reduxStore = configureStore({
   reducer,
   devTools: false,
-  enhancers: (getDefaultEnhancers) =>
-    getDefaultEnhancers().concat(devToolsEnhancer({ port: 8081 })),
+  enhancers: (getDefaultEnchancers) =>
+    getDefaultEnchancers().concat(devToolsEnhancer({ port: 8081 })),
 });
 
 declare global {

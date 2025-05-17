@@ -218,8 +218,7 @@ const overwolfMock: typeof overwolf = {
   },
 };
 
-// @ts-ignore
-export default import.meta.env.DEV &&
+export default process.env.NODE_ENV !== "production" &&
   Object.defineProperty(window, "overwolf", {
     writable: true,
     value: overwolfMock,

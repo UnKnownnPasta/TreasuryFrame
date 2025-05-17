@@ -1,20 +1,6 @@
 .ingame {
-    overflow: hidden;
-    max-height: 400px;
-    max-width: 300px;
-    background-color: transparent;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: left;
-    height: 100%;
-    width: 100%;
-    color: white;
-    background-color: transparent;
-    padding-left: 10px;
-
-    &.visible {
-      background-color: transparent;
-    }
+  overflow: hidden;
+  max-height: 400px;
+  max-width: 350px;
+  background-color: transparent;
 }

@@ -1,7 +1,7 @@
 export const REQUIRED_FEATURES = [
   "gep_internal",
-  "game_info",
-  "match_info",
+  "game-info",
+  "match-info",
 ];
 export const RETRY_TIMES = 10;
 

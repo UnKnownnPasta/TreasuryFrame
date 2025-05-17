@@ -1,14 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import relic from "../../screens/background/stores/prime";
-import inventory from "../../screens/background/stores/inventory";
-import rewards from "../../screens/ingame/stores/rewards";
-import itemData from "../../screens/background/stores/data";
+import background from "../../screens/background/stores/background";
 
 const rootReducer = combineReducers({
-  rewards,
-  inventory,
-  relic,
-  itemData
+  background,
 });
 
 export type RootReducer = ReturnType<typeof rootReducer>;

@@ -1,16 +1,7 @@
 .header {
   display: flex;
-  height: 4.2vh;
-  background-color: var(--neutral-1);
-
-  button {
-    padding: 0;
-    border: none;
-  }
-  
-  button:focus {
-    outline: none;
-  }
+  height: 5vh;
+  background-color: var(--background-color);
 }
 
 .header__icon {

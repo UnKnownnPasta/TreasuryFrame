@@ -1,5 +1,3 @@
-import { log } from "./log";
-
 /**
  * Pauses the execution for the specified number of milliseconds.
  * @param ms The number of milliseconds to sleep.
@@ -105,45 +103,22 @@ const normalizeName = (name: string) => {
 };
 
 /**
- * Sanitizes a JSON string by performing find-and-replace operations and parsing it into a valid JSON array.
- *
- * @param {string} text - The JSON string to be sanitized.
- * @return {any[]} An array of sanitized JSON objects, or an empty array if the input is invalid.
+ * Safely parses a JSON string into a JavaScript object.
+ * @param data The JSON string to parse.
+ * @example const parsedJSON = parseSafeJSON<MyInterface>('{"foo":"bar"}');
+ * @returns The parsed JavaScript object, or null if parsing fails.
  */
-function sanitizeJsonString(text: string) {
-  // Perform the required find-and-replace operations
-  let sanitizedText = "";
-
-  for (let i = 0; i < text.length; i++) {
-      if (text[i] === '\\') {
-          sanitizedText += '';
-      } else {
-          sanitizedText += text[i];
-      }
-  }
-
-  sanitizedText = sanitizedText
-      .replace(/("{")/g, '{"')
-      .replace(/(}",)/g, '},')
-      .replace(/""([^""]+)""/g, '"$1"');
-
-  // Adding brackets to make sure it is a valid JSON array
-  sanitizedText = `${sanitizedText}`;
-
-  const jsonArray = [];
-
+const parseSafeJSON = <T>(data: string = ""): T | null => {
   try {
-      jsonArray.push(...JSON.parse(sanitizedText)["MiscItems"]);
-      log("Successful inventory parsing", "src/lib/utils", "sanitizeJsonString");
+    if (data === "") return null; // Return null for empty data
+    return JSON.parse(data) as T;
   } catch (error) {
-      log("Failed inventory parsing", "src/lib/utils", "sanitizeJsonString");
-      return [];
+    console.error("Failed to parse JSON:", JSON.stringify(error));
+    return null;
   }
-
-  return jsonArray;
-}
-
-const isDev = import.meta.env.DEV;
+};
+// @ts-ignore
+const isDev = process.env.NODE_ENV === "development";
 
 export {
   classNames,
@@ -151,7 +126,7 @@ export {
   random,
   throttle,
   normalizeName,
-  sanitizeJsonString,
+  parseSafeJSON,
   sleep,
   isDev,
   fromNow,
