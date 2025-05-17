@@ -7,10 +7,9 @@ import {
 import { useGameEventProvider, useWindow } from "overwolf-hooks";
 import { useCallback, useEffect } from "react";
 import { WARFRAME_CLASS_ID, getWarframeGame } from "../../../lib/games";
-import { setInfo, setParsedStateInfo } from "../stores/background";
+import { setRawInventoryData, parseInventoryData, processInventoryThunk } from "../stores/background";
 import store from "../../../app/shared/store";
 import { log } from "../../../lib/log";
-import { doTranslations } from '../../../api';
 
 const { DESKTOP, INGAME } = WINDOW_NAMES;
 
@@ -20,14 +19,20 @@ const BackgroundWindow = () => {
   const { start, stop } = useGameEventProvider(
     {
       onInfoUpdates: async (info) => {
+        // First store the raw data
         store.dispatch(
-          setInfo({
+          setRawInventoryData({
             ...info,
             timestamp: Date.now(),
           })
-        )
-        const translations = await doTranslations();
-        setParsedStateInfo(translations);
+        );
+        // Then parse it
+        store.dispatch(parseInventoryData());
+        // Finally process it with our API
+        const state = store.getState();
+        if (state.background.parsedData.infos.length > 0) {
+          store.dispatch(processInventoryThunk(state.background.parsedData.infos));
+        }
       },
       onNewEvents() {},
     },

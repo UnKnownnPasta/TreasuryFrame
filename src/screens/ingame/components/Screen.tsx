@@ -6,7 +6,7 @@ import "./styles/Screen.css";
 
 const Screen = () => {
   const { infos } = useSelector(
-    (state: RootReducer) => state.background,
+    (state: RootReducer) => state.background.parsedData,
   );
 
   return (

@@ -45,7 +45,7 @@ export const DesktopHeader = () => {
     >
       <SVGComponent />
       <h1 className={"header__title"}>
-        🐺 ICON - OVERWOLF-MODERN-REACT-BOILERPLATE-V4
+        TreasuryFrame
       </h1>
       <div className={"header__controls__group"}>
         <button

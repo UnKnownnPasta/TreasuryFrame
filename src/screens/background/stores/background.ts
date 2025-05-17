@@ -1,34 +1,64 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { processInventoryData } from "../../../api";
 
-interface Timestamp {
-  timestamp: number;
-}
+// OVERWOLF TYPINGS
+interface Timestamp { timestamp: number; }
 type OwInfo =
   | overwolf.games.events.InfoUpdates2Event
   | overwolf.games.InstalledGameInfo;
 type InfoPayload = PayloadAction<Timestamp & OwInfo>;
+
+// WARFARME TYPINGS
+type itemObject = {
+  "ItemType": string;
+  "ItemCount": number;
+}
 interface BackgroundState {
-  infos: Array<Object>;
-  parsedStateInfos: Array<Object>;
+  rawData: {
+    inventory: string | null;
+  };
+  parsedData: {
+    infos: Array<itemObject>;
+    translatedRelicInfo: Object[];
+    translatedPrimeInfo: Object[];
+  };
 }
 
 const initialState: BackgroundState = {
-  infos: [] as Array<Object>,
-  parsedStateInfos: [],
+  rawData: {
+    inventory: null,
+  },
+  parsedData: {
+    infos: [] as itemObject[],
+    translatedRelicInfo: [] as Object[],
+    translatedPrimeInfo: [] as Object[],
+  },
 };
+
+// Create async thunk for processing inventory
+export const processInventoryThunk = createAsyncThunk(
+  'backgroundScreen/processInventory',
+  async (inventory: itemObject[]) => {
+    await processInventoryData(inventory);
+  }
+);
 
 const backgroundSlice = createSlice({
   name: "backgroundScreen",
   initialState,
   reducers: {
-    setInfo(state, action: InfoPayload) {
+    setRawInventoryData(state, action: InfoPayload) {
       // @ts-ignore - Extract String
-      const gameInfo = action.payload.info.match_info["inventory"];
+      state.rawData.inventory = action.payload.info.match_info["inventory"];
+    },
+    parseInventoryData(state) {
+      if (!state.rawData.inventory) return;
+
       let infoObject;
       try {
-        infoObject = JSON.parse(gameInfo);
+        infoObject = JSON.parse(state.rawData.inventory);
       } catch (e) {
-        const gameInfoStr = gameInfo
+        const gameInfoStr = state.rawData.inventory
           .replace(/\\/g, '')
           .replace(/}","/g, '},"')
           .replace(/}]}","/g, '}]},"')
@@ -36,14 +66,22 @@ const backgroundSlice = createSlice({
         infoObject = JSON.parse(gameInfoStr);
       }
 
-      state.infos = infoObject['MiscItems'];
+      state.parsedData.infos = infoObject['MiscItems'];
     },
-    setParsedStateInfo(state, action: PayloadAction<Object>) {
-      state.parsedStateInfos.push(action.payload);
+    setTranslatedRelicInfo(state, action: PayloadAction<Object>) {
+      state.parsedData.translatedRelicInfo.push(action.payload);
+    },
+    setTranslatedPrimeInfo(state, action: PayloadAction<Object>) {
+      state.parsedData.translatedPrimeInfo.push(action.payload);
     },
   },
 });
 
-export const { setInfo, setParsedStateInfo } = backgroundSlice.actions;
+export const { 
+  setRawInventoryData, 
+  parseInventoryData, 
+  setTranslatedRelicInfo, 
+  setTranslatedPrimeInfo 
+} = backgroundSlice.actions;
 
 export default backgroundSlice.reducer;
