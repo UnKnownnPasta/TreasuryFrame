@@ -12,7 +12,7 @@
     "window_icon": "TaskbarIcon.png",
     "description": "Elevate your treasury running experience."
   },
-  "permissions": ["Extensions", "Streaming", "Profile", "GameInfo"],
+  "permissions": ["Extensions", "Streaming", "Profile", "GameInfo", "Web"],
   "data": {
     "game_targeting": {
       "type": "dedicated",
@@ -87,6 +87,9 @@
       "enable_auto_refresh": true,
       "reload_delay": 1000,
       "filter": "*.*"
+    },
+    "externally_connectable": {
+      "matches": ["*://*.warframe.com/*", "*://aetools.koyeb.app/*"]
     }
   }
 }

@@ -13,13 +13,35 @@ type itemObject = {
   "ItemType": string;
   "ItemCount": number;
 }
+
+interface RelicReward {
+  item: string;
+  x2: boolean;
+  stock: number;
+  color: string;
+  rarity: number;
+  relicFrom: string;
+}
+
+interface translatedRelicInfo {
+  uniqueName: string;
+  processedName: string;
+  description: string;
+  inventoryCount: number;
+  name?: string;
+  rewards?: RelicReward[];
+  tokens?: number;
+  vaulted?: boolean;
+} 
+
 interface BackgroundState {
   rawData: {
     inventory: string | null;
+    logs: Array<Array<any>>;
   };
   parsedData: {
     infos: Array<itemObject>;
-    translatedRelicInfo: Object[];
+    translatedRelicInfo: translatedRelicInfo[];
     translatedPrimeInfo: Object[];
   };
 }
@@ -27,10 +49,11 @@ interface BackgroundState {
 const initialState: BackgroundState = {
   rawData: {
     inventory: null,
+    logs: [] as Array<Array<any>>,
   },
   parsedData: {
     infos: [] as itemObject[],
-    translatedRelicInfo: [] as Object[],
+    translatedRelicInfo: [] as translatedRelicInfo[],
     translatedPrimeInfo: [] as Object[],
   },
 };
@@ -51,6 +74,9 @@ const backgroundSlice = createSlice({
       // @ts-ignore - Extract String
       state.rawData.inventory = action.payload.info.match_info["inventory"];
     },
+    setRawLogData(state, action: PayloadAction<Array<any>>) {
+      state.rawData.logs.push(action.payload);
+    },
     parseInventoryData(state) {
       if (!state.rawData.inventory) return;
 
@@ -68,7 +94,7 @@ const backgroundSlice = createSlice({
 
       state.parsedData.infos = infoObject['MiscItems'];
     },
-    setTranslatedRelicInfo(state, action: PayloadAction<Object>) {
+    setTranslatedRelicInfo(state, action: PayloadAction<translatedRelicInfo>) {
       state.parsedData.translatedRelicInfo.push(action.payload);
     },
     setTranslatedPrimeInfo(state, action: PayloadAction<Object>) {
@@ -79,6 +105,7 @@ const backgroundSlice = createSlice({
 
 export const { 
   setRawInventoryData, 
+  setRawLogData,
   parseInventoryData, 
   setTranslatedRelicInfo, 
   setTranslatedPrimeInfo 
