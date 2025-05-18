@@ -1,0 +1,35 @@
+.sidebar {
+  width: 200px;
+  font-family: 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  color: #8c9191;
+  font-size: large;
+  padding-top: 50px;
+  gap: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.sidebar-item {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  background: #151718;
+  opacity: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: left;
+  transition: background 0.3s;
+}
+
+.sidebar-item.active {
+  background: #2b2c30;
+  color: white
+}
+
+.sidebar-item .icon {
+  margin-right: 10px;
+}

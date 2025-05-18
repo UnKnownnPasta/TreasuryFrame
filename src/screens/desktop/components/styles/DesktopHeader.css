@@ -41,9 +41,9 @@
 
 .header__title {
   color: var(--primary-color-text);
-  margin-left: 5px;
-  margin-top: 3px;
+  margin-left: 10px;
   font-size: var(--font-size-medium);
+  align-items: center;
 }
 
 .header__controls__group {

@@ -7,7 +7,7 @@ import {
 import { useGameEventProvider, useWindow } from "overwolf-hooks";
 import { useCallback, useEffect } from "react";
 import { WARFRAME_CLASS_ID, getWarframeGame } from "../../../lib/games";
-import { setInfo, setEvent } from "../stores/background";
+import { setRawInventoryData, parseInventoryData, processInventoryThunk } from "../stores/background";
 import store from "../../../app/shared/store";
 import { log } from "../../../lib/log";
 
@@ -18,20 +18,23 @@ const BackgroundWindow = () => {
   const [ingame] = useWindow(INGAME, DISPLAY_OVERWOLF_HOOKS_LOGS);
   const { start, stop } = useGameEventProvider(
     {
-      onInfoUpdates: (info) =>
+      onInfoUpdates: async (info) => {
+        // First store the raw data
         store.dispatch(
-          setInfo({
+          setRawInventoryData({
             ...info,
             timestamp: Date.now(),
           })
-        ),
-      onNewEvents: (events) =>
-        store.dispatch(
-          setEvent({
-            ...events,
-            timestamp: Date.now(),
-          })
-        ),
+        );
+        // Then parse it
+        store.dispatch(parseInventoryData());
+        // Finally process it with our API
+        const state = store.getState();
+        if (state.background.parsedData.infos.length > 0) {
+          store.dispatch(processInventoryThunk(state.background.parsedData.infos));
+        }
+      },
+      onNewEvents() {},
     },
     REQUIRED_FEATURES,
     RETRY_TIMES,
