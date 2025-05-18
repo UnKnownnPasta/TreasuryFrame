@@ -3,13 +3,13 @@
   "type": "WebApp",
   "meta": {
     "name": "TreasuryFrame",
-    "version": "0.1.0",
+    "version": "0.0.2",
     "minimum-overwolf-version": "0.120.0",
     "author": "UnKnownnPasta",
-    "icon": "IconMouseOver.png",
-    "icon_gray": "IconMouseNormal.png",
-    "launcher_icon": "desktop-icon.ico",
-    "window_icon": "TaskbarIcon.png",
+    "icon": "images/IconMouseOver.png",
+    "icon_gray": "images/IconMouseNormal.png",
+    "launcher_icon": "images/desktop-icon.ico",
+    "window_icon": "images/TaskbarIcon.png",
     "description": "Elevate your treasury running experience."
   },
   "permissions": ["Extensions", "Streaming", "Profile", "GameInfo", "Web"],
@@ -89,7 +89,7 @@
       "filter": "*.*"
     },
     "externally_connectable": {
-      "matches": ["*://*.warframe.com/*", "*://aetools.koyeb.app/*"]
+      "matches": ["*://*.warframe.com/*", "https://aetools.koyeb.app/*"]
     }
   }
 }
