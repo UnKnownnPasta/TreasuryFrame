@@ -115,19 +115,6 @@ export interface SentinelData {
   [key: string]: any;
 }
 
-/**
- *         {
-            "name": "Axi A1",
-            "rewards": [
-                {
-                    "item": "Trinity Systems",
-                    "x2": false,
-                    "stock": 40,
-                    "color": "YELLOW",
-                    "rarity": 25.33,
-                    "relicFrom": "Axi A1"
-                },
- */
 export interface ExternalRelicData {
   name: string;
   rewards: {
@@ -138,9 +125,26 @@ export interface ExternalRelicData {
     rarity: number;
     relicFrom: string;
   }[];
+  tokens?: number;
+  vaulted?: boolean;
+  inventoryCount?: number;
+  _kind: 'relics';
+}
+
+export interface ExternalPrimeData {
+  name: string;
+  item: string;
+  x2: boolean;
+  stock: number;
+  color: string;
+  rarity: number;
+  relicFrom: string[];
+  inventoryCount: number;
+  _kind: 'primes';
 }
 
 export interface ExternalApiResponse {
   relics: ExternalRelicData[];
+  primes: ExternalPrimeData[];
   // Add other fields from your external API as needed
 } 

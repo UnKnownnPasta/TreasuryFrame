@@ -32,17 +32,27 @@ interface translatedRelicInfo {
   rewards?: RelicReward[];
   tokens?: number;
   vaulted?: boolean;
-} 
+}
+
+interface translatedPrimeInfo {
+  primeUniqueName: string;
+  type: string;
+  ItemInventoryName: string;
+  ItemName: string;
+  ItemOwnedCount: number;
+  ItemInStockCount: number;
+}
 
 interface BackgroundState {
   rawData: {
     inventory: string | null;
     logs: Array<Array<any>>;
+    lastUpdateTime: Date | null;
   };
   parsedData: {
     infos: Array<itemObject>;
     translatedRelicInfo: translatedRelicInfo[];
-    translatedPrimeInfo: Object[];
+    translatedPrimeInfo: translatedPrimeInfo[];
   };
 }
 
@@ -50,11 +60,12 @@ const initialState: BackgroundState = {
   rawData: {
     inventory: null,
     logs: [] as Array<Array<any>>,
+    lastUpdateTime: null,
   },
   parsedData: {
     infos: [] as itemObject[],
     translatedRelicInfo: [] as translatedRelicInfo[],
-    translatedPrimeInfo: [] as Object[],
+    translatedPrimeInfo: [] as translatedPrimeInfo[],
   },
 };
 
@@ -73,6 +84,7 @@ const backgroundSlice = createSlice({
     setRawInventoryData(state, action: InfoPayload) {
       // @ts-ignore - Extract String
       state.rawData.inventory = action.payload.info.match_info["inventory"];
+      state.rawData.lastUpdateTime = new Date();
     },
     setRawLogData(state, action: PayloadAction<Array<any>>) {
       state.rawData.logs.push(action.payload);
@@ -97,7 +109,7 @@ const backgroundSlice = createSlice({
     setTranslatedRelicInfo(state, action: PayloadAction<translatedRelicInfo>) {
       state.parsedData.translatedRelicInfo.push(action.payload);
     },
-    setTranslatedPrimeInfo(state, action: PayloadAction<Object>) {
+    setTranslatedPrimeInfo(state, action: PayloadAction<translatedPrimeInfo>) {
       state.parsedData.translatedPrimeInfo.push(action.payload);
     },
   },

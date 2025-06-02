@@ -1,7 +1,23 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--primary-color-text);
+  background-color: var(--background-color);
+}
+
 .header {
   display: flex;
-  height: 5vh;
+  position: relative;
+  height: 2rem;
   background-color: var(--background-color);
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
 }
 
 .header__icon {
@@ -42,6 +58,7 @@
 .header__title {
   color: var(--primary-color-text);
   margin-left: 10px;
+  margin-top: 9px;
   font-size: var(--font-size-medium);
   align-items: center;
 }
@@ -66,4 +83,32 @@
 .header__control__close {
   --color-hover: var(--secondary-color-light);
   --bg-color-hover: var(--secondary-color-dark);
+}
+
+.header__status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  font-size: 0.8rem;
+}
+
+.header__status__indicator {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.header__status__indicator.mock {
+  background-color: var(--warning);
+  color: #000;
+}
+
+.header__status__indicator.live {
+  background-color: var(--success);
+  color: #fff;
+}
+
+.header__status__time {
+  color: var(--text-secondary);
 }

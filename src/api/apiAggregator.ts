@@ -179,37 +179,22 @@ export const processInventoryData = async (inventory: ItemObject[]): Promise<voi
     }
 
     const relicData = apiCache.getRelicData();
-    const weaponsData = apiCache.getWeaponsData();
-    const warframeData = apiCache.getWarframeData();
-    const sentinelData = apiCache.getSentinelsData();
     const externalApiData = await apiCache.getExternalApiData();
+    const primeNameMap = apiCache.getPrimeNameMap();
 
-    if (!relicData || !weaponsData || !warframeData || !sentinelData) {
+    if (!relicData) {
       throw new Error('API cache not properly initialized');
     }
 
     const relics: RelicData[] = relicData.ExportRelicArcane || [];
-    const weapons: WeaponData[] = weaponsData.ExportWeapons || [];
-    const warframes: WarframeData[] = warframeData.ExportWarframes || [];
-    const sentinels: SentinelData[] = sentinelData.ExportSentinels || [];
-    const allItems = [...weapons, ...warframes, ...sentinels];
 
-    // Reset store data before processing new items
-    store.dispatch(setTranslatedRelicInfo({
-      uniqueName: '',
-      processedName: '',
-      description: '',
-      inventoryCount: 0
-    }));
-    store.dispatch(setTranslatedPrimeInfo({}));
-
-    // Process each inventory item
     for (const item of inventory) {
       const id = extractId(item.ItemType);
       
+      // Process relics
       const relicMatch = relics.find(r => extractId(r.uniqueName) === id);
       if (relicMatch) {
-        const externalMatch = externalApiData?.find(e => `${e.name} Relic` === relicMatch.name);
+        const externalMatch = externalApiData?.relics.find(e => `${e.name} Relic` === relicMatch.name);
         const processedRelic = processRelicData(relicMatch, externalMatch);
         store.dispatch(setTranslatedRelicInfo({
           ...processedRelic,
@@ -218,23 +203,29 @@ export const processInventoryData = async (inventory: ItemObject[]): Promise<voi
         continue;
       }
 
+      // Process prime items using the name mapping
       const parts = splitCamel(id);
-      
-      for (const primeItem of allItems) {
-        const nameParts = primeItem.name.split(" ");
-        const uniqueNameParts = splitCamel(extractId(primeItem.uniqueName));
-        if (!nameParts.includes("Prime") || !uniqueNameParts.includes("Prime") || !parts.includes("Prime")) continue;
+      if (!parts.includes("Prime")) continue;
 
-        const result = smartJoin(parts, uniqueNameParts, nameParts);
-        if (result) {
-          const processedPrime = processPrimeData(primeItem);
+      // Try to find a matching prime item in the external API data
+      const externalPrime = externalApiData?.primes.find(e => {
+        const itemName = e.name.toLowerCase();
+        const inventoryName = id.toLowerCase();
+        return inventoryName.includes(itemName.replace(" prime", ""));
+      });
+
+      if (externalPrime) {
+        // Get the source data from our mapping
+        const mappedData = primeNameMap[externalPrime.name];
+        if (mappedData) {
           store.dispatch(setTranslatedPrimeInfo({
-            ...processedPrime,
+            primeUniqueName: mappedData.uniqueName,
+            type: mappedData.type,
             ItemInventoryName: id,
-            ItemName: result,
-            ItemOwnedCount: item.ItemCount
+            ItemName: externalPrime.name,
+            ItemOwnedCount: item.ItemCount,
+            ItemInStockCount: externalPrime.stock ?? 0
           }));
-          break;
         }
       }
     }

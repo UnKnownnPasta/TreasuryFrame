@@ -15,7 +15,12 @@ const handleDiscordClick = () => {
   overwolf.utils.openUrlInDefaultBrowser("https://discord.gg/");
 };
 
-export const DesktopHeader = () => {
+interface DesktopHeaderProps {
+  isMockData: boolean;
+  lastUpdateTime: Date | null;
+}
+
+export const DesktopHeader = ({ isMockData, lastUpdateTime }: DesktopHeaderProps) => {
   const [maximized, setMaximize] = useState(false);
   const [desktopWindow] = useWindow(DESKTOP, DISPLAY_OVERWOLF_HOOKS_LOGS);
   const [backgroundWindow] = useWindow(BACKGROUND, DISPLAY_OVERWOLF_HOOKS_LOGS);
@@ -47,6 +52,16 @@ export const DesktopHeader = () => {
       <h1 className={"header__title"}>
         TreasuryFrame
       </h1>
+      <div className="header__status">
+        <span className={`header__status__indicator ${isMockData ? 'mock' : 'live'}`}>
+          {isMockData ? 'Waiting for data...' : 'Up to date'}
+        </span>
+        {lastUpdateTime && (
+          <span className="header__status__time">
+            Last updated: {lastUpdateTime.toLocaleTimeString()}
+          </span>
+        )}
+      </div>
       <div className={"header__controls__group"}>
         <button
           className={classNames("header__icon header__control header__discord")}
